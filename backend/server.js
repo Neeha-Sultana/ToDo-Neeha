@@ -12,7 +12,7 @@ const cohere = new CohereClient({ apiKey: process.env.CO_API_KEY });
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false } // Important for Supabase
+  ssl: { rejectUnauthorized: false },
 });
 
 // GET /todos
@@ -25,7 +25,6 @@ app.get('/todos', async (req, res) => {
   }
 });
 
-
 // POST /todos
 app.post('/todos', async (req, res) => {
   const { task } = req.body;
@@ -33,7 +32,7 @@ app.post('/todos', async (req, res) => {
 
   try {
     const result = await pool.query(
-      'INSERT INTO todo_list (task) VALUES ($1) RETURNING *',
+      'INSERT INTO todo_list (task, completed) VALUES ($1, false) RETURNING *',
       [task]
     );
     res.status(201).json(result.rows[0]);
@@ -53,13 +52,36 @@ app.delete('/todos/:id', async (req, res) => {
   }
 });
 
+// PATCH /todos/:id (toggle completed)
+app.patch('/todos/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  const { completed } = req.body;
+
+  if (typeof completed !== 'boolean') {
+    return res.status(400).json({ error: 'Completed status required' });
+  }
+
+  try {
+    const result = await pool.query(
+      'UPDATE todo_list SET completed = $1 WHERE id = $2 RETURNING *',
+      [completed, id]
+    );
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Todo not found' });
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to update todo' });
+  }
+});
+
 // POST /summarize
 app.post('/summarize', async (req, res) => {
   try {
     const result = await pool.query('SELECT task FROM todo_list WHERE completed = false');
     const todos = result.rows;
 
-    if (!todos.length) {
+    if (todos.length === 0) {
       return res.status(400).json({ error: 'No pending todos to summarize' });
     }
 
