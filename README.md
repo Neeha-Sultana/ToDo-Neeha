@@ -163,7 +163,6 @@ Responsive UI with clean design.
 
 ### 5. Data Stored in Supabase Database
 ![Supabase Database](./screenshots/supabase-database2.png)
-
 ### 6. Delete a Task
 ![Delete a task](./screenshots/delete-task.png)
 
