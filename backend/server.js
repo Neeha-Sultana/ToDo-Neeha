@@ -4,83 +4,70 @@ const axios = require('axios');
 const { CohereClient } = require('cohere-ai');
 const { Pool } = require('pg');
 
-const cohere = new CohereClient({ apiKey: process.env.CO_API_KEY });
 const app = express();
+const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
-const PORT = process.env.PORT || 5000;
+const cohere = new CohereClient({ apiKey: process.env.CO_API_KEY });
 
-// PostgreSQL setup
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  ssl: { rejectUnauthorized: false } // Important for Supabase
 });
-
-// Ensure table exists
-(async () => {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS todos (
-      id SERIAL PRIMARY KEY,
-      task TEXT NOT NULL,
-      completed BOOLEAN DEFAULT false
-    );
-  `);
-})();
-
-// Routes
 
 // GET /todos
 app.get('/todos', async (req, res) => {
-  const result = await pool.query('SELECT * FROM todos ORDER BY id DESC');
-  res.json(result.rows);
+  try {
+    const result = await pool.query('SELECT * FROM todo_list ORDER BY id DESC');
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch todos' });
+  }
 });
+
 
 // POST /todos
 app.post('/todos', async (req, res) => {
   const { task } = req.body;
   if (!task) return res.status(400).json({ error: 'Task is required' });
 
-  const result = await pool.query(
-    'INSERT INTO todos (task, completed) VALUES ($1, $2) RETURNING *',
-    [task, false]
-  );
-  res.status(201).json(result.rows[0]);
+  try {
+    const result = await pool.query(
+      'INSERT INTO todo_list (task) VALUES ($1) RETURNING *',
+      [task]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to add todo' });
+  }
 });
 
 // DELETE /todos/:id
 app.delete('/todos/:id', async (req, res) => {
-  const { id } = req.params;
-  await pool.query('DELETE FROM todos WHERE id = $1', [id]);
-  res.json({ message: 'Deleted successfully' });
-});
-
-// PATCH /todos/:id
-app.patch('/todos/:id', async (req, res) => {
-  const { id } = req.params;
-  const { completed } = req.body;
-
-  const result = await pool.query(
-    'UPDATE todos SET completed = $1 WHERE id = $2 RETURNING *',
-    [completed, id]
-  );
-  res.json(result.rows[0]);
+  const id = Number(req.params.id);
+  try {
+    await pool.query('DELETE FROM todo_list WHERE id = $1', [id]);
+    res.json({ message: 'Deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to delete todo' });
+  }
 });
 
 // POST /summarize
 app.post('/summarize', async (req, res) => {
   try {
-    const result = await pool.query('SELECT task FROM todos WHERE completed = false');
-    const pendingTasks = result.rows.map(row => `- ${row.task}`).join('\n');
+    const result = await pool.query('SELECT task FROM todo_list WHERE completed = false');
+    const todos = result.rows;
 
-    if (!pendingTasks) {
+    if (!todos.length) {
       return res.status(400).json({ error: 'No pending todos to summarize' });
     }
 
+    const todoTexts = todos.map(todo => `- ${todo.task}`).join('\n');
+
     const response = await cohere.chat({
       model: 'command-r',
-      message: `Summarize the following todo list in a concise way:\n${pendingTasks}`,
+      message: `Summarize the following todo list in a concise way:\n${todoTexts}`,
       temperature: 0.5,
     });
 
@@ -92,11 +79,11 @@ app.post('/summarize', async (req, res) => {
 
     res.json({ message: 'Summary sent to Slack', summary });
   } catch (error) {
-    console.error('Error in /summarize:', error.response?.data || error.message);
-    res.status(500).json({ error: 'Failed to generate or send summary' });
+    console.error('Error in /summarize:', error);
+    res.status(500).json({ error: 'Failed to summarize or send to Slack' });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });
