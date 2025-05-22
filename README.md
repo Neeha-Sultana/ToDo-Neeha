@@ -85,8 +85,23 @@ Send task summary to Slack.
 
 Responsive UI with clean design.
 
-Screenshots
-(Add your screenshots here)
+## Screenshots
+
+### 1. Initial Page Load
+![Initial Page](./screenshots/initial-page.png)
+
+### 2. After Adding Tasks
+![Tasks Added](./screenshots/tasks-added.png)
+
+### 3. Summarize and Send to Slack Button
+![Summarize Button](./screenshots/summarize-button.png)
+
+### 4. Summary Message in Slack
+![Slack Summary](./screenshots/slack-summary.png)
+
+### 5. Data Stored in Supabase Database
+![Supabase Database](./screenshots/supabase-database.png)
+
 
 ## Author
 Neeha Sultana
