@@ -96,31 +96,32 @@ This Task Manager app allows users to efficiently manage their to-do lists. It i
    ```bash
    cd frontend
    npm start
-Open your browser and navigate to http://localhost:3000 to use the app.
+   ```
+   Open your browser and navigate to http://localhost:3000 to use the app.
 
 7. LLM Setup Guidance
-   Sign up at your preferred LLM provider (e.g., Cohere AI).
-   Generate an API key from their dashboard.
-   Make sure your backend calls the real LLM API for summarization (do not mock).
-   Your backend endpoint /summarize sends the to-do list content to the LLM API and formats the response.
-   Save the key in the .env file.
+   - Sign up at your preferred LLM provider (e.g., Cohere AI).
+   - Generate an API key from their dashboard.
+   - Make sure your backend calls the real LLM API for summarization (do not mock).
+   - Your backend endpoint /summarize sends the to-do list content to the LLM API and formats the response.
+   - Save the key in the .env file.
 
 8. Slack Setup Guidance
-   Create or select a Slack workspace.
-   Go to Settings & administration > Manage apps.
-   Search for Incoming Webhooks and add it.
-   Configure a new webhook URL for your target channel.
-   Copy the webhook URL and set it in your backend .env as SLACK_WEBHOOK_URL.
+   - Create or select a Slack workspace.
+   - Go to Settings & administration > Manage apps.
+   - Search for Incoming Webhooks and add it.
+   - Configure a new webhook URL for your target channel.
+   - Copy the webhook URL and set it in your backend .env as SLACK_WEBHOOK_URL.
 
  9. Database Setup (Supabase)
-   Create a free project on Supabase.
-   Create a table named todos with columns like id (UUID), task (text), and completed (boolean).
-   Grab your API URL and anon/public key for environment variables.
+   - Create a free project on Supabase.
+   - Create a table named todos with columns like id (UUID), task (text), and completed (boolean).
+   - Grab your API URL and anon/public key for environment variables.
 
 10. Deployment (Optional)
-   You can deploy the frontend on platforms like Netlify, Vercel, or Firebase Hosting.
-   Backend can be deployed on Render, Heroku, or Supabase Edge Functions.
-   Make sure to configure environment variables correctly on your deployment platform.
+   - You can deploy the frontend on platforms like Netlify, Vercel, or Firebase Hosting.
+   - Backend can be deployed on Render, Heroku, or Supabase Edge Functions.
+   - Make sure to configure environment variables correctly on your deployment platform.
 
 ## Design & Architecture Decisions
  - Frontend and backend are separate projects for modularity and scalability.
