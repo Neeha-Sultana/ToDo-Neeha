@@ -56,17 +56,16 @@ This Task Manager app allows users to efficiently manage their to-do lists. It i
 
 2. Install dependencies:
 
-```bash
-npm install
-Start the development server:
+   ```bash
+   npm install
 
-bash
-Copy
-Edit
-npm start
+3. Start the development server:
+   ```bash
+   npm start
 Ensure your backend API server is running and accessible at the expected endpoints (/todos, /summarize).
 
-Usage
+
+## Usage
 Open your browser and go to http://localhost:3000 (or the port your React app runs on).
 
 Add tasks using the input field and "Add" button.
@@ -89,4 +88,5 @@ Responsive UI with clean design.
 Screenshots
 (Add your screenshots here)
 
-Author
+## Author
+Neeha Sultana
