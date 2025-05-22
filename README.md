@@ -71,8 +71,8 @@ This Task Manager app allows users to efficiently manage their to-do lists. It i
    
 4. Configure environment variables
    Create a .env file in the backend folder based on .env.example with the following variables:
-   
-5. Ensure your backend API server is running and accessible at the expected endpoints (/todos, /summarize).
+
+   Ensure your backend API server is running and accessible at the expected endpoints (/todos, /summarize).
    ```bash
    PORT=5000
    SUPABASE_URL=your_supabase_project_url
