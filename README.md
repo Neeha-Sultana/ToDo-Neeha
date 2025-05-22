@@ -100,6 +100,9 @@ Responsive UI with clean design.
 ### 4. Summary Message in Slack
 ![Slack Summary](./screenshots/slack-summary.png)
 
+### 5. Delete a Task
+![Delete a task](./screenshots/delete-task.png)
+
 ### 5. Data Stored in Supabase Database
 ![Supabase Database](./screenshots/supabase-database2.png)
 
