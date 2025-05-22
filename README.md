@@ -51,3 +51,18 @@ This Task Manager app allows users to efficiently manage their to-do lists. It i
    ```bash
    git clone https://github.com/your-username/task-manager-react.git
    cd task-manager-react
+
+
+Install dependencies:
+
+bash
+Copy
+Edit
+npm install
+Start the development server:
+
+bash
+Copy
+Edit
+npm start
+Ensure your backend API server is running and accessible at the expected endpoints (/todos, /summarize).
