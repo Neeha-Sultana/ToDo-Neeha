@@ -101,7 +101,7 @@ Responsive UI with clean design.
 ![Slack Summary](./screenshots/slack-summary.png)
 
 ### 5. Data Stored in Supabase Database
-![Supabase Database](./screenshots/supabase-database.png)
+![Supabase Database](./screenshots/supabase-database2.png)
 
 
 ## Author
