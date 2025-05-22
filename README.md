@@ -52,12 +52,11 @@ This Task Manager app allows users to efficiently manage their to-do lists. It i
    git clone https://github.com/your-username/task-manager-react.git
    cd task-manager-react
 
+## Installation
 
-Install dependencies:
+2. Install dependencies:
 
-bash
-Copy
-Edit
+```bash
 npm install
 Start the development server:
 
@@ -66,3 +65,28 @@ Copy
 Edit
 npm start
 Ensure your backend API server is running and accessible at the expected endpoints (/todos, /summarize).
+
+Usage
+Open your browser and go to http://localhost:3000 (or the port your React app runs on).
+
+Add tasks using the input field and "Add" button.
+
+Mark tasks as complete by checking the checkbox.
+
+Delete tasks using the ✕ button.
+
+Click the Summarize & Send to Slack button to generate a summary of tasks and send it to Slack.
+
+Features
+Add, delete, and mark tasks as complete.
+
+Real-time updates of task list.
+
+Send task summary to Slack.
+
+Responsive UI with clean design.
+
+Screenshots
+(Add your screenshots here)
+
+Author
