@@ -112,7 +112,7 @@ This Task Manager app allows users to efficiently manage their to-do lists. It i
    - Configure a new webhook URL for your target channel.
    - Copy the webhook URL and set it in your backend .env as SLACK_WEBHOOK_URL.
 
- 9. Database Setup (Supabase)
+9. Database Setup (Supabase)
    - Create a free project on Supabase.
    - Create a table named todos with columns like id (UUID), task (text), and completed (boolean).
    - Grab your API URL and anon/public key for environment variables.
