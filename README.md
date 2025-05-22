@@ -73,17 +73,16 @@ This Task Manager app allows users to efficiently manage their to-do lists. It i
    Create a .env file in the backend folder based on .env.example with the following variables:
    
 5. Ensure your backend API server is running and accessible at the expected endpoints (/todos, /summarize).
-   ````bash
+   ```bash
    PORT=5000
    SUPABASE_URL=your_supabase_project_url
    SUPABASE_KEY=your_supabase_anon_or_service_key
    COHERE_API_KEY=your_openai_api_key
    SLACK_WEBHOOK_URL=your_slack_incoming_webhook_url
    ```
-
-- SUPABASE_URL and SUPABASE_KEY: From your Supabase project dashboard.
-- OPENAI_API_KEY: Get it from OpenAI or your chosen LLM provider.
-- SLACK_WEBHOOK_URL: Configure an Incoming Webhook in your Slack workspace and copy the URL.
+   - SUPABASE_URL and SUPABASE_KEY: From your Supabase project dashboard.
+   - OPENAI_API_KEY: Get it from OpenAI or your chosen LLM provider.
+   - SLACK_WEBHOOK_URL: Configure an Incoming Webhook in your Slack workspace and copy the URL.
 
 6. Run the application locally
    Backend
@@ -131,17 +130,13 @@ This Task Manager app allows users to efficiently manage their to-do lists. It i
  - OpenAI API integrated for reliable and meaningful natural language summarization.
  - Slack Incoming Webhook for simple and effective notifications.
    
-12. 
+ 
 ## Usage
-Open your browser and go to http://localhost:3000 (or the port your React app runs on).
-
-Add tasks using the input field and "Add" button.
-
-Mark tasks as complete by checking the checkbox.
-
-Delete tasks using the ✕ button.
-
-Click the Summarize & Send to Slack button to generate a summary of tasks and send it to Slack.
+- Open your browser and go to http://localhost:3000 (or the port your React app runs on).
+- Add tasks using the input field and "Add" button.
+- Mark tasks as complete by checking the checkbox.
+- Delete tasks using the ✕ button.
+- Click the Summarize & Send to Slack button to generate a summary of tasks and send it to Slack.
 
 Features
 Add, delete, and mark tasks as complete.
