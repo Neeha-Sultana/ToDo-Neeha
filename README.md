@@ -40,7 +40,8 @@ This Task Manager app allows users to efficiently manage their to-do lists. It i
 - React  
 - Axios (for HTTP requests)  
 - CSS for styling  
-- Backend API (not included here) for tasks management and Slack integration  
+- Backend API for tasks management and Slack integration
+- Database for storing the tasks (Supabase) 
 
 ---
 
